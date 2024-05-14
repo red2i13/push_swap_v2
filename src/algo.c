@@ -97,7 +97,7 @@ int selection_sort(int *num, int size)
     }
     return(0);
 }
-int algo_start(t_list **stack_a, t_list **stack_b, int arr[500])
+int algo_start(t_list **stack_a, t_list **stack_b, int *arr)
 {
     int len_a;
     int len_b;
@@ -106,18 +106,22 @@ int algo_start(t_list **stack_a, t_list **stack_b, int arr[500])
     int range;
     int i;
 
-    i = 0;
-    range = (len_a <= 100) * 15 + (len_a == 500) * 30;
     (void)stack_a;
     (void)stack_b;
     len_a = ft_lstsize(*stack_a);
     len_b = ft_lstsize(*stack_b);
+    range = 
     selection_sort(arr, len_a);
+    i = 0;
     while (*stack_a)
     {
-        /* code */
-        if()
-
+        if(arr[i] <= len_b)
+            pb(stack_a, stack_b);
+        else if(arr[i] <= range + len_b)
+            pb(stack_a, stack_b);
+        else if(in_range(stack_a, stack_b))
+            //
+        len_b = ft_lstsize(*stack_b);
     }
     return(0);
 }

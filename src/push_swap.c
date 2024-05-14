@@ -99,19 +99,20 @@ int main(int ac, char **av)
 {
     t_list *stack_a;
     t_list *stack_b;
-    static int arr[500];
+    int *arr;
 
     (void)av;
     stack_a = NULL;
     stack_b = NULL;
     if(ac < 2)
         return(1);
+    arr =
     if(ft_read(av, &stack_a, ac, arr))
     {
         ft_free_list(stack_a);
         return(write(2, "Error\n", 6), 1);
     }
-    //
+    
 
     t_list *tmp = stack_a;
     t_list *tmp1 = stack_a;
