@@ -75,14 +75,50 @@ void    ft_sort_threee(t_list **stack)
      }
     init_index(stack);
 }
-int algo_start(t_list **stack_a, t_list **stack_b)
+int selection_sort(int *num, int size)
 {
-    // int len;
+    int i;
+    int j;
+    int tmp;
+
+    i = 1;
+    while(i < size)
+    {
+        j = i;
+        while (j > 0 && num[j - 1] > num[j])
+        {
+            tmp = num[j];
+            num[j] = num[j- 1];
+            num[j-1] = tmp;
+            j--;
+        }
+        i++;
+        
+    }
+    return(0);
+}
+int algo_start(t_list **stack_a, t_list **stack_b, int arr[500])
+{
+    int len_a;
+    int len_b;
     // int min;
     // int max;
+    int range;
+    int i;
 
+    i = 0;
+    range = (len_a <= 100) * 15 + (len_a == 500) * 30;
     (void)stack_a;
     (void)stack_b;
+    len_a = ft_lstsize(*stack_a);
+    len_b = ft_lstsize(*stack_b);
+    selection_sort(arr, len_a);
+    while (*stack_a)
+    {
+        /* code */
+        if()
+
+    }
     return(0);
 }
    

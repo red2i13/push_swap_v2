@@ -61,7 +61,7 @@ void ft_free_list(t_list *lst)
         free(tmp);
     }    
 }
-int ft_read(char **av, t_list **stack_a, int ac)
+int ft_read(char **av, t_list **stack_a, int ac, int st_arr[500])
 {
     char **arr;
     int i;
@@ -79,6 +79,7 @@ int ft_read(char **av, t_list **stack_a, int ac)
         while(arr[j])
         {
             num = f_atoi(arr[j]);
+            st_arr[i+j-1] = num;
             num_ptr = malloc(sizeof(int));
             if (num_ptr == NULL || num == LONG_MAX - 1)
             {
@@ -94,30 +95,24 @@ int ft_read(char **av, t_list **stack_a, int ac)
     }
     return(0);
 }
-// void ft_debug(t_list **stack_a, t_list **stack_b)
-// {
-//   //  print_list(*stack_a, "stack_a");
-//    // print_list(*stack_b, "stack_b");
-//     ra(stack_a, true);
-//     ra(stack_a, true);
-//   //  print_list(*stack_a, "af stack_a");
-//    // print_list(*stack_b, "af stack_b");
-// }
 int main(int ac, char **av)
 {
     t_list *stack_a;
     t_list *stack_b;
+    static int arr[500];
 
     (void)av;
     stack_a = NULL;
     stack_b = NULL;
     if(ac < 2)
         return(1);
-    if(ft_read(av, &stack_a, ac))
+    if(ft_read(av, &stack_a, ac, arr))
     {
         ft_free_list(stack_a);
         return(write(2, "Error\n", 6), 1);
     }
+    //
+
     t_list *tmp = stack_a;
     t_list *tmp1 = stack_a;
     while (tmp)
@@ -134,7 +129,7 @@ int main(int ac, char **av)
         }
         tmp = tmp->next;
     }
-
+    algo_start(&stack_a, &stack_b, arr);
     ft_free_list(stack_a);
     ft_free_list(stack_b);
 }

@@ -22,7 +22,7 @@ void rrr(t_list **stack_a, t_list **stack_b);
 void pa(t_list **stack_a, t_list **stack_b);
 void pb(t_list **stack_a, t_list **stack_b);
 //algo
-int algo_start(t_list **stack_a, t_list **stack_b);
+int algo_start(t_list **stack_a, t_list **stack_b, int arr[500]);
 
 typedef struct t_target{
     int num;
