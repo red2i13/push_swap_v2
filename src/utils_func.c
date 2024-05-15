@@ -25,3 +25,23 @@ int ft_sqrt(int num)
 
     return(i - 1);
 }
+int find_num(int num, int *arr, int size)
+{
+    int min;
+    int max;
+    int mid;
+
+    min = 0;
+    max = size - 1;
+    while (min <= max)
+    {
+        mid = min + (max - min)  / 2;
+        if (arr[mid] == num)
+            return(mid);
+        else if (arr[mid] < num)
+            min = mid + 1;
+        else if(arr[mid] > num)
+            max = mid - 1;
+    }
+    return(-1);
+}
