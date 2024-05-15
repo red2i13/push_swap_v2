@@ -106,7 +106,7 @@ int main(int ac, char **av)
     stack_b = NULL;
     if(ac < 2)
         return(1);
-    arr =
+    arr = 
     if(ft_read(av, &stack_a, ac, arr))
     {
         ft_free_list(stack_a);

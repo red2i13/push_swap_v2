@@ -1,5 +1,5 @@
 CFLAGS = -Wall -Wextra -Werror -g
-FILES =  push_swap.c moves.c get_next_line.c get_next_line_utils.c algo.c
+FILES =  push_swap.c moves.c get_next_line.c get_next_line_utils.c algo.c utils_func.c
 SOURCES = $(addprefix $(SRC_DIR)/, $(FILES))
 OBJECTS = $(SOURCES:.c=.o)
 NAME = push_swap

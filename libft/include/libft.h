@@ -21,6 +21,7 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 	int				pos;
+	int				rank;
 }					t_list;
 
 t_list				*ft_lstnew(void *content);

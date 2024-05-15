@@ -15,6 +15,25 @@ void init_index(t_list **stack)
         i++;
     } 
 }
+void init_idx_rank(t_list **stack, int *arr, int size)
+{
+    int i;
+    t_list *tmp;
+
+    i= 0;
+    tmp = *stack;
+    while (tmp)
+    {
+        tmp->pos = i;
+        while (i)
+        {
+            /* code */
+        }
+        
+        tmp = tmp->next;
+        i++;
+    } 
+}
 int min_max(t_list *stack, int flag)
 {
     int val;
@@ -110,12 +129,13 @@ int algo_start(t_list **stack_a, t_list **stack_b, int *arr)
     (void)stack_b;
     len_a = ft_lstsize(*stack_a);
     len_b = ft_lstsize(*stack_b);
-    range = 
+    range = ft_sqrt(len_a);
     selection_sort(arr, len_a);
+    init_index(stack_a);
     i = 0;
     while (*stack_a)
     {
-        if(arr[i] <= len_b)
+        if(arr[i] <= range)
             pb(stack_a, stack_b);
         else if(arr[i] <= range + len_b)
             pb(stack_a, stack_b);

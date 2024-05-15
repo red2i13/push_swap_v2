@@ -120,7 +120,9 @@ void rrr(t_list **stack_a, t_list **stack_b)
 
 void pa(t_list **stack_a, t_list **stack_b)
 {
-    t_list *tmp = (*stack_b);
+    t_list *tmp;
+    
+    tmp  = (*stack_b);
     (*stack_b) = (*stack_b)->next;
     tmp->next = NULL;
     ft_lstadd_front(stack_a, tmp);  
@@ -128,7 +130,9 @@ void pa(t_list **stack_a, t_list **stack_b)
 }
 void pb(t_list **stack_a, t_list **stack_b)
 {
-    t_list *tmp = (*stack_a);
+    t_list *tmp;
+
+    tmp = (*stack_a);
     (*stack_a) = (*stack_a)->next;
     tmp->next = NULL;
     ft_lstadd_front(stack_b, tmp);

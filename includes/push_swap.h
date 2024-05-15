@@ -31,7 +31,8 @@ typedef struct t_target{
 }t_target;
 
 //algo function
-int ft_count(t_list *target_a, t_list *stack_b, int len_a, int num_target);
+int ft_sqrt(int num);
+
 //debug fucntions
 void print_list(t_list *lst, char *msg);
 
