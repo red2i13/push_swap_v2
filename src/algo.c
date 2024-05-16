@@ -25,11 +25,7 @@ void init_idx_rank(t_list **stack, int *arr, int size)
     while (tmp)
     {
         tmp->pos = i;
-        while (i)
-        {
-            /* code */
-        }
-        
+        tmp->rank = find_num(*(int *)tmp->content, arr, size);
         tmp = tmp->next;
         i++;
     } 
@@ -116,33 +112,89 @@ int selection_sort(int *num, int size)
     }
     return(0);
 }
+
+t_list *find_max(t_list **stack_b)
+{
+    t_list *tmp;
+    t_list *max;
+
+    tmp = *stack_b;
+    max = *stack_b;
+    while (tmp)
+    {
+        if (*(int *)tmp->content > *(int *)max->content)
+             max = tmp;
+        tmp = tmp->next;
+    }
+    return max;
+}
+void final_sort(t_list **stack_a, t_list **stack_b, int max_i)
+{
+    t_list *max;
+    int len_b = max_i + 1;
+
+    while (*stack_b)
+    {
+        max = find_max(stack_b);
+        init_index(stack_b);
+        while (*stack_b != max)
+        {
+            if(max->pos > len_b / 2)
+                rrb(stack_b, true);
+            else
+                rb(stack_b, true);
+        }
+        pa(stack_a, stack_b);
+        len_b--;
+    }
+}
+
+int still_inrange(t_list *stack, int range)
+{
+    int i;
+    
+    i = 0;
+    while (stack)
+    {
+        if(stack->rank < range)
+            return(i);
+        stack = stack->next;
+        i++;
+    }
+    return(i);
+}
 int algo_start(t_list **stack_a, t_list **stack_b, int *arr)
 {
     int len_a;
-    int len_b;
-    // int min;
-    // int max;
+    int min;
     int range;
-    int i;
 
     (void)stack_a;
     (void)stack_b;
     len_a = ft_lstsize(*stack_a);
-    len_b = ft_lstsize(*stack_b);
-    range = ft_sqrt(len_a);
+    range = ft_sqrt(len_a) * 3 / 2;
     selection_sort(arr, len_a);
-    init_index(stack_a);
-    i = 0;
+    init_idx_rank(stack_a, arr, len_a);
+    min = 0;
     while (*stack_a)
     {
-        if(arr[i] <= range)
+        if((*stack_a)->rank <= min)
+        {
+            min++;
             pb(stack_a, stack_b);
-        else if(arr[i] <= range + len_b)
+            rb(stack_b, true);
+        }
+        else if((*stack_a)->rank <= range + min)
+        {
+            min++;
             pb(stack_a, stack_b);
-        else if(in_range(stack_a, stack_b))
-            //
-        len_b = ft_lstsize(*stack_b);
+        }
+        else if(still_inrange(*stack_a, range + min) <= len_a / 2)
+            ra(stack_a, true);
+        else
+            rra(stack_a, true);
     }
+    final_sort(stack_a, stack_b, len_a - 1);
     return(0);
 }
    

@@ -22,7 +22,7 @@ void rrr(t_list **stack_a, t_list **stack_b);
 void pa(t_list **stack_a, t_list **stack_b);
 void pb(t_list **stack_a, t_list **stack_b);
 //algo
-int algo_start(t_list **stack_a, t_list **stack_b, int arr[500]);
+int algo_start(t_list **stack_a, t_list **stack_b, int *arr);
 
 typedef struct t_target{
     int num;
@@ -32,6 +32,7 @@ typedef struct t_target{
 
 //algo function
 int ft_sqrt(int num);
+int find_num(int num, int *arr, int size);
 
 //debug fucntions
 void print_list(t_list *lst, char *msg);

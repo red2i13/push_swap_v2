@@ -11,13 +11,11 @@ int ft_sqrt(int num)
 {
     int i;
     int tmp;
-    // int j;
 
     i = 1;
     while (i < num / 2)
     {
         tmp = ft_cal(i, 2);
-        printf("the num is %i\n", tmp);
         if(tmp > num)
             break;
         i++;

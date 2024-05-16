@@ -1,28 +1,76 @@
-#include "../includes/push_swap.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-int find_num(int num, int *arr, int size)
+typedef struct s_list
 {
-    int min;
-    int max;
-    int mid;
+	void			*content;
+	struct s_list	*next;
+	int				pos;
+	int				rank;
+}
+					t_list;
+int	ft_lstsize(t_list *lst)
+{
+	int	i;
 
-    min = 0;
-    max = size - 1;
-    while (min <= max)
+	i = 0;
+	while (lst)
+	{
+		i++;
+		lst = lst->next;
+	}
+	return (i);
+}
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*ptr;
+
+	ptr = (t_list *)malloc(sizeof(t_list));
+	if (!ptr)
+		return (NULL);
+	ptr->content = content;
+	ptr->next = NULL;
+	return (ptr);
+}
+void	ft_lstadd_front(t_list **lst, t_list *new)
+{
+	if (!new || !lst)
+		return ;
+	new->next = *lst;
+	*(lst) = new;
+}
+int *int_arr(t_list *stack)
+{
+    int size;
+    int *arr;
+    int i;
+
+    i = 0;
+    size = ft_lstsize(stack);
+    arr = (int *)malloc(sizeof(int) * size);
+    while (stack)
     {
-        mid = min + (max - min)  / 2;
-        if (arr[mid] == num)
-            return(mid);
-        else if (arr[mid] < num)
-            min = mid + 1;
-        else if(arr[mid] > num)
-            max = mid - 1;
+        arr[i] = *(int*)stack->content;
+        stack = stack->next;
+        i++;
     }
-    return(0);
-    
+    return(arr);
 }
 int main()
 {
-    int arr[] = {1, 2, 3 ,4 ,5 ,6 ,7 ,8, 9};
-    printf("number is found %i\n", find_num(5, arr, 9));
+    t_list *stack_a = NULL;
+    for(int i = 0; i < 5;i++)
+    {
+        int *j = malloc(sizeof(int));
+        *j = i;
+        ft_lstadd_front(&stack_a, ft_lstnew(j));
+    }
+    int *arr = int_arr(stack_a);
+    //debug
+    int len = ft_lstsize(stack_a);
+    for(int k = 0; k < len; k++)
+    {
+        printf("test arr %i\n", arr[k]);
+    }
 }
+

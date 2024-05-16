@@ -1,6 +1,22 @@
 #include "../includes/push_swap.h"
 
+int *int_arr(t_list *stack)
+{
+    int size;
+    int *arr;
+    int i;
 
+    i = 0;
+    size = ft_lstsize(stack);
+    arr = (int *)malloc(sizeof(int) * size);
+    while (stack)
+    {
+        arr[i] = *(int*)stack->content;
+        stack = stack->next;
+        i++;
+    }
+    return(arr);
+}
 long	f_atoi(const char *nptr)
 {
 	int	i;
@@ -61,7 +77,7 @@ void ft_free_list(t_list *lst)
         free(tmp);
     }    
 }
-int ft_read(char **av, t_list **stack_a, int ac, int st_arr[500])
+int ft_read(char **av, t_list **stack_a, int ac)
 {
     char **arr;
     int i;
@@ -79,7 +95,6 @@ int ft_read(char **av, t_list **stack_a, int ac, int st_arr[500])
         while(arr[j])
         {
             num = f_atoi(arr[j]);
-            st_arr[i+j-1] = num;
             num_ptr = malloc(sizeof(int));
             if (num_ptr == NULL || num == LONG_MAX - 1)
             {
@@ -106,14 +121,13 @@ int main(int ac, char **av)
     stack_b = NULL;
     if(ac < 2)
         return(1);
-    arr = 
-    if(ft_read(av, &stack_a, ac, arr))
+    arr = malloc(sizeof(int));
+    if(ft_read(av, &stack_a, ac))
     {
         ft_free_list(stack_a);
         return(write(2, "Error\n", 6), 1);
     }
     
-
     t_list *tmp = stack_a;
     t_list *tmp1 = stack_a;
     while (tmp)
@@ -130,6 +144,7 @@ int main(int ac, char **av)
         }
         tmp = tmp->next;
     }
+    arr = int_arr(stack_a);
     algo_start(&stack_a, &stack_b, arr);
     ft_free_list(stack_a);
     ft_free_list(stack_b);
