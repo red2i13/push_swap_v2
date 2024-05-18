@@ -5,7 +5,6 @@ char	*_set_line(char **line_buffer, ssize_t nbyte)
 {
 	char	*line;
 	size_t	i;
-	char	*tmp;
 
 	i = 0;
 	if (nbyte == 0 && !(*line_buffer))
@@ -20,10 +19,7 @@ char	*_set_line(char **line_buffer, ssize_t nbyte)
 		i++;
 	i += ((*line_buffer)[i] == '\n');
 	line = ft_substr(*line_buffer, 0, i);
-	tmp = ft_substr((*line_buffer), i, ft_strlen((*line_buffer)));
-	free((*line_buffer));
-	(*line_buffer) = tmp;
-	tmp = NULL;
+	free(*line_buffer);
 	return (line);
 }
 
@@ -48,6 +44,7 @@ char	*fill_line_buffer(int fd, char **leftovers, char *buffer)
 		tmp = ft_realloc(*leftovers, buffer);
 		free((*leftovers));
 		(*leftovers) = tmp;
+		tmp = NULL;
 		if (ft_strchr(buffer, '\n'))
 			break ;
 	}
@@ -58,8 +55,9 @@ char	*get_next_line(int fd)
 {
 	char		*buffer;
 	char		*line;
-	static char	*left;
+	char	*left;
 
+	left = NULL;
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));

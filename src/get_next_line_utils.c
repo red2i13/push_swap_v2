@@ -1,18 +1,18 @@
 #include "../includes/get_next_line.h"
 
-// size_t	ft_strlen(const char *s)
-// {
-// 	size_t	i;
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
 
-// 	i = 0;
-// 	if (!s)
-// 		return (0);
-// 	while (s[i] != '\0')
-// 	{
-// 		i++;
-// 	}
-// 	return (i);
-// }
+	i = 0;
+	if (!s)
+		return (0);
+	while (s[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -32,19 +32,19 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-// void	ft_strlcpy(char *dst, const char *src, size_t dstsize)
-// {
-// 	size_t	i;
+void	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+{
+	size_t	i;
 
-// 	i = 0;
-// 	while (i < dstsize - 1 && src[i])
-// 	{
-// 		dst[i] = src[i];
-// 		i++;
-// 	}
-// 	dst[i] = '\0';
-// 	return ;
-// }
+	i = 0;
+	while (i < dstsize - 1 && src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return ;
+}
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {

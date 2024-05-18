@@ -3,6 +3,9 @@ FILES =  push_swap.c moves.c get_next_line.c get_next_line_utils.c algo.c utils_
 SOURCES = $(addprefix $(SRC_DIR)/, $(FILES))
 OBJECTS = $(SOURCES:.c=.o)
 NAME = push_swap
+BONUS = checker
+SOURCES_BONUS = $(addprefix $(SRC_DIR)/, checker.c get_next_line.c get_next_line_utils.c moves.c checker_utils.c)
+OBJECTS_BONUS = $(SOURCES_BONUS:.c=.o)
 CC = cc
 LIB = libft
 SRC_DIR = src
@@ -11,6 +14,8 @@ LIBFT_DIR = libft/include
 INCLUDES = include
 
 all: $(NAME) logo
+bonus: $(OBJECTS_BONUS) libft/libft.a printf/libftprintf.a
+	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -I$(INCLUDES) -o $@ $^
 
 logo: 
 	@echo "██████╗░██╗░░░██╗░██████╗██╗░░██╗░██████╗░██╗░░░░░░░██╗░█████╗░██████╗░"

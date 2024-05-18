@@ -64,8 +64,32 @@ int is_sorted(t_list *stack)
     }
     return(0);
 }
+int find_pos(t_list *stack, int rank)
+{
+    while (stack)
+    {
+        if(stack->rank == rank)
+            return (stack->pos);
+        stack = stack->next;
+    }
+    return(0);
+}
+void rot_max(t_list **stack_a, int pos)
+{
+    int len;
+    int i;
 
-
+    len = ft_lstsize(*stack_a);  
+    i = pos * (pos <= len / 2) + (len - pos)*(pos > len /2);
+    while (i)
+    {
+        if(pos <= len / 2)
+            ra(stack_a, true);
+        else
+            rra(stack_a, true);
+        i--;
+    }
+}
 void    ft_sort_threee(t_list **stack)
 {
     int min = min_max(*stack, 0); 
@@ -89,6 +113,42 @@ void    ft_sort_threee(t_list **stack)
         }
      }
     init_index(stack);
+}
+void find_min(t_list **stack_a, t_list **stack_b, int rank)
+{
+    t_list *tmp;
+
+    tmp =*stack_a;
+    while (tmp)
+    {
+        if(tmp->rank == rank)
+        {
+            rot_max(stack_a, tmp->pos);
+            pb(stack_a, stack_b, true);
+        }
+        tmp = tmp->next;
+    }
+}
+void ft_sort_five(t_list **stack_a, t_list **stack_b)
+{
+    find_min(stack_a, stack_b, 0);
+    init_index(stack_a);
+    find_min(stack_a, stack_b, 1);
+    ft_sort_threee(stack_a);
+    if(*(int*)(*stack_b)->content > *(int*)(*stack_b)->next->content)
+        pa(stack_a, stack_b, true);
+    else
+    {
+        rb(stack_b, true);
+        pa(stack_a, stack_b, true);
+    }
+    pa(stack_a, stack_b, true);
+}
+void ft_sort_four(t_list **stack_a, t_list **stack_b)
+{
+    find_min(stack_a, stack_b, 0);
+    ft_sort_threee(stack_a);
+    pa(stack_a, stack_b, true);
 }
 int selection_sort(int *num, int size)
 {
@@ -144,7 +204,7 @@ void final_sort(t_list **stack_a, t_list **stack_b, int max_i)
             else
                 rb(stack_b, true);
         }
-        pa(stack_a, stack_b);
+        pa(stack_a, stack_b, true);
         len_b--;
     }
 }
@@ -169,25 +229,44 @@ int algo_start(t_list **stack_a, t_list **stack_b, int *arr)
     int min;
     int range;
 
-    (void)stack_a;
-    (void)stack_b;
     len_a = ft_lstsize(*stack_a);
     range = ft_sqrt(len_a) * 3 / 2;
     selection_sort(arr, len_a);
     init_idx_rank(stack_a, arr, len_a);
+    if(len_a == 5)
+    {
+        ft_sort_five(stack_a, stack_b);
+        return(0);
+    }
+    else if(len_a == 4)
+    {
+        ft_sort_four(stack_a, stack_b);
+        return(0);
+    } 
+    else if(len_a == 3)
+    {
+        ft_sort_threee(stack_a);
+        return(0);
+    }
+    else if (len_a == 2)
+    {
+        if(*(int*)(*stack_a)->content > *(int*)(*stack_a)->next->content)
+            sa(stack_a, true);
+        return(0);
+    }
     min = 0;
     while (*stack_a)
     {
         if((*stack_a)->rank <= min)
         {
             min++;
-            pb(stack_a, stack_b);
+            pb(stack_a, stack_b, true);
             rb(stack_b, true);
         }
         else if((*stack_a)->rank <= range + min)
         {
             min++;
-            pb(stack_a, stack_b);
+            pb(stack_a, stack_b, true);
         }
         else if(still_inrange(*stack_a, range + min) <= len_a / 2)
             ra(stack_a, true);
@@ -198,4 +277,3 @@ int algo_start(t_list **stack_a, t_list **stack_b, int *arr)
     return(0);
 }
    
-

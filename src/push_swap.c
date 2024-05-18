@@ -121,13 +121,11 @@ int main(int ac, char **av)
     stack_b = NULL;
     if(ac < 2)
         return(1);
-    arr = malloc(sizeof(int));
     if(ft_read(av, &stack_a, ac))
     {
         ft_free_list(stack_a);
         return(write(2, "Error\n", 6), 1);
     }
-    
     t_list *tmp = stack_a;
     t_list *tmp1 = stack_a;
     while (tmp)
@@ -148,4 +146,5 @@ int main(int ac, char **av)
     algo_start(&stack_a, &stack_b, arr);
     ft_free_list(stack_a);
     ft_free_list(stack_b);
+    free(arr);
 }

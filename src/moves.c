@@ -18,21 +18,13 @@ void sb(t_list **stack_b, bool flag)
     if(flag == true)
         ft_printf("sb\n");
 }
-void ss(t_list **stack_a, t_list**stack_b)
+void ss(t_list **stack_a, t_list**stack_b, bool flag)
 {  
     sa(stack_a, false);
     sb(stack_b, false);
-    ft_printf("ss\n");
+    if (flag == true)
+        ft_printf("ss\n");
 }
-// void ra(t_list **stack_a, bool flag)
-// {
-//     ft_lstlast(*stack_a)->next = (*stack_a);
-//     t_list *tmp = (*stack_a);
-//     (*stack_a) = (*stack_a)->next;
-//     tmp->next = NULL;
-//     if(flag == true)
-//         ft_printf("ra\n");
-// }
 void ra(t_list **stack_a, bool flag)
 {
     t_list *first = *stack_a;
@@ -58,20 +50,13 @@ void rb(t_list **stack_b, bool flag)
     if(flag == true)
         ft_printf("rb\n");
 }
-// void rb(t_list **stack_b, bool flag)
-// {
-//     ft_lstlast(*stack_b)->next = (*stack_b);
-//     t_list *tmp = (*stack_b);
-//     (*stack_b) = (*stack_b)->next;
-//     tmp->next = NULL;
-//     if(flag == true)
-//         ft_printf("rb\n");
-// }
-void rr(t_list **stack_a, t_list **stack_b)
+
+void rr(t_list **stack_a, t_list **stack_b, bool flag)
 {
     ra(stack_a, false);
     rb(stack_b, false);
-    printf("rr\n");
+    if (flag == true)
+        printf("rr\n");
 }
 void rra(t_list **stack_a, bool flag)
 {
@@ -111,30 +96,37 @@ void rrb(t_list **stack_b, bool flag)
     if(flag == true)
         ft_printf("rrb\n");
 }
-void rrr(t_list **stack_a, t_list **stack_b)
+void rrr(t_list **stack_a, t_list **stack_b, bool flag)
 {
     rra(stack_a, false);
     rrb(stack_b, false);
-    ft_printf("rrr\n");
+    if (flag == true)
+        ft_printf("rrr\n");
 }
 
-void pa(t_list **stack_a, t_list **stack_b)
+void pa(t_list **stack_a, t_list **stack_b, bool flag)
 {
     t_list *tmp;
     
+    if(!(*stack_b))
+        return ;
     tmp  = (*stack_b);
     (*stack_b) = (*stack_b)->next;
     tmp->next = NULL;
     ft_lstadd_front(stack_a, tmp);  
-    ft_printf("pa\n");
+    if (flag == true)
+        ft_printf("pa\n");
 }
-void pb(t_list **stack_a, t_list **stack_b)
+void pb(t_list **stack_a, t_list **stack_b, bool flag)
 {
     t_list *tmp;
 
+    if(!(*stack_a))
+        return ;
     tmp = (*stack_a);
     (*stack_a) = (*stack_a)->next;
     tmp->next = NULL;
     ft_lstadd_front(stack_b, tmp);
-    ft_printf("pb\n");
+    if (flag == true)
+        ft_printf("pb\n");
 }
