@@ -234,20 +234,11 @@ int algo_start(t_list **stack_a, t_list **stack_b, int *arr)
     selection_sort(arr, len_a);
     init_idx_rank(stack_a, arr, len_a);
     if(len_a == 5)
-    {
-        ft_sort_five(stack_a, stack_b);
-        return(0);
-    }
+        return(ft_sort_five(stack_a, stack_b),0);
     else if(len_a == 4)
-    {
-        ft_sort_four(stack_a, stack_b);
-        return(0);
-    } 
+        return(ft_sort_four(stack_a, stack_b), 0);
     else if(len_a == 3)
-    {
-        ft_sort_threee(stack_a);
-        return(0);
-    }
+        return(ft_sort_threee(stack_a),0);
     else if (len_a == 2)
     {
         if(*(int*)(*stack_a)->content > *(int*)(*stack_a)->next->content)
@@ -257,7 +248,7 @@ int algo_start(t_list **stack_a, t_list **stack_b, int *arr)
     min = 0;
     while (*stack_a)
     {
-        if((*stack_a)->rank <= min)
+        if((*stack_a)->rank < min)
         {
             min++;
             pb(stack_a, stack_b, true);
