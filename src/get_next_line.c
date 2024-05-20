@@ -53,8 +53,8 @@ char	*fill_line_buffer(int fd, char **leftovers, char *buffer)
 
 char	*get_next_line(int fd)
 {
-	char		*buffer;
-	char		*line;
+	char	*buffer;
+	char	*line;
 	char	*left;
 
 	left = NULL;
