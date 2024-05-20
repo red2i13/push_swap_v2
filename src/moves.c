@@ -3,6 +3,9 @@
 void sa(t_list **stack_a, bool flag)
 {
     void *num;
+
+    if(!(*stack_a))
+        return ;
     num = (*stack_a)->content;
     (*stack_a)->content = (*stack_a)->next->content;
     (*stack_a)->next->content = num;
@@ -12,6 +15,9 @@ void sa(t_list **stack_a, bool flag)
 void sb(t_list **stack_b, bool flag)
 {
     void *num;
+    
+    if(!(*stack_b))
+        return ;    
     num = (*stack_b)->content;
     (*stack_b)->content = (*stack_b)->next->content;
     (*stack_b)->next->content = num;
@@ -20,6 +26,8 @@ void sb(t_list **stack_b, bool flag)
 }
 void ss(t_list **stack_a, t_list**stack_b, bool flag)
 {  
+    if(!(*stack_a) || !(*stack_b))
+        return ;    
     sa(stack_a, false);
     sb(stack_b, false);
     if (flag == true)
@@ -27,6 +35,8 @@ void ss(t_list **stack_a, t_list**stack_b, bool flag)
 }
 void ra(t_list **stack_a, bool flag)
 {
+    if(!(*stack_a))
+        return ;
     t_list *first = *stack_a;
     t_list *last = ft_lstlast(*stack_a);
 
@@ -43,6 +53,8 @@ void rb(t_list **stack_b, bool flag)
     t_list *first = *stack_b;
     t_list *last = ft_lstlast(*stack_b);
 
+    if(!(*stack_b))
+        return ;
     *stack_b = (*stack_b)->next;
     first->next = NULL;
     last->next = first;
@@ -53,6 +65,8 @@ void rb(t_list **stack_b, bool flag)
 
 void rr(t_list **stack_a, t_list **stack_b, bool flag)
 {
+    if(!(*stack_a) || !(*stack_b))
+        return ;
     ra(stack_a, false);
     rb(stack_b, false);
     if (flag == true)
@@ -64,6 +78,8 @@ void rra(t_list **stack_a, bool flag)
     t_list *last;
     t_list *tmp;
 
+    if(!(*stack_a) || ft_lstsize(*stack_a) < 2)
+        return ;
     last = ft_lstlast(*stack_a);
     before_last = (*stack_a);
     while (before_last->next->next != NULL)
@@ -83,6 +99,8 @@ void rrb(t_list **stack_b, bool flag)
     t_list *last;
     t_list *tmp;
 
+    if(!(*stack_b) || ft_lstsize(*stack_b) < 2)
+        return ;
     last = ft_lstlast(*stack_b);
     before_last = (*stack_b);
     while (before_last->next->next != NULL)
@@ -98,6 +116,8 @@ void rrb(t_list **stack_b, bool flag)
 }
 void rrr(t_list **stack_a, t_list **stack_b, bool flag)
 {
+    if(!(*stack_a) || !(*stack_b))
+        return ;
     rra(stack_a, false);
     rrb(stack_b, false);
     if (flag == true)

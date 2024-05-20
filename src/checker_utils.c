@@ -5,6 +5,8 @@ int is_sorted(t_list *stack)
     int num;
     int compare;
 
+    if (!stack)
+        return (1);
     while (stack->next)
     {
         num = *(int *)stack->content;
