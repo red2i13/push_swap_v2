@@ -15,7 +15,7 @@ INCLUDES = include
 
 all: $(NAME) logo
 bonus: $(OBJECTS_BONUS) libft/libft.a printf/libftprintf.a
-	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -I$(INCLUDES) -o $@ $^
+	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -I$(INCLUDES) -o $(BONUS) $^
 
 logo: 
 	@echo "██████╗░██╗░░░██╗░██████╗██╗░░██╗░██████╗░██╗░░░░░░░██╗░█████╗░██████╗░"
@@ -41,6 +41,7 @@ clean:
 	$(MAKE) -C $(PRT) clean
 fclean: clean
 	rm -f push_swap
+	rm -f checker
 	$(MAKE) -C $(LIB) fclean
 	$(MAKE) -C $(PRT) fclean
 re: fclean all

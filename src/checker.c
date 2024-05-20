@@ -71,8 +71,7 @@ int checker(t_list **stack_a, t_list **stack_b)
             return(write(2, "Error\n", 6), 1);
         }
         app_opp(stack_a, stack_b, num);
-        f
-        ree(cmd);
+        free(cmd);
     }
     if(is_sorted(*stack_a) || *stack_b)
         return(write(1, "KO\n", 3), 1);
