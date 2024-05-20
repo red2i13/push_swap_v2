@@ -110,6 +110,24 @@ int ft_read(char **av, t_list **stack_a, int ac)
     }
     return(0);
 }
+int is_duplicated(t_list *tmp)
+{
+    t_list *tmp1;
+
+    tmp1= tmp;
+    while (tmp)
+    {
+        tmp1 = tmp->next;
+        while (tmp1)
+        {
+            if((*(int*)tmp->content) == (*(int *)tmp1->content))
+                return(1);
+            tmp1 = tmp1->next;
+        }
+        tmp = tmp->next;
+    }
+    return(0);
+}
 int main(int ac, char **av)
 {
     t_list *stack_a;
@@ -121,26 +139,10 @@ int main(int ac, char **av)
     stack_b = NULL;
     if(ac < 2)
         return(1);
-    if(ft_read(av, &stack_a, ac))
+    if(ft_read(av, &stack_a, ac) || is_duplicated(stack_a))
     {
         ft_free_list(stack_a);
         return(write(2, "Error\n", 6), 1);
-    }
-    t_list *tmp = stack_a;
-    t_list *tmp1 = stack_a;
-    while (tmp)
-    {
-        tmp1 = tmp->next;
-        while (tmp1)
-        {
-            if((*(int*)tmp->content) == (*(int *)tmp1->content))
-            {
-                ft_free_list(stack_a);
-                return(write(2, "Error\n", 6), 1);
-            }
-            tmp1 = tmp1->next;
-        }
-        tmp = tmp->next;
     }
     arr = int_arr(stack_a);
     algo_start(&stack_a, &stack_b, arr);
