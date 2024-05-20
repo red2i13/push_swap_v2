@@ -17,13 +17,26 @@ int is_sorted(t_list *stack)
     }
     return(0);
 }
+int enqeue(char *n_parse, t_list **stack_a)
+{
+    long num;
+    int *num_ptr;
+
+    num = f_atoi(n_parse);
+    num_ptr = malloc(sizeof(int));
+    if (num_ptr == NULL || num == LONG_MAX - 1)
+    {
+        return (free(num_ptr),1);
+    }
+    *num_ptr = num; 
+    ft_lstadd_back(&(*stack_a), ft_lstnew(num_ptr));
+    return(0);
+}
 int ft_read(char **av, t_list **stack_a, int ac)
 {
     char **arr;
     int i;
     int j;
-    long num;
-    int *num_ptr;
 
     i= 1;
     while (i < ac)
@@ -32,18 +45,10 @@ int ft_read(char **av, t_list **stack_a, int ac)
         if(!arr || !arr[0])
             return (ft_free_arr(arr),1);
         j = 0;
-        while(arr[j])
+        if(enqeue(arr[j], stack_a))
         {
-            num = f_atoi(arr[j]);
-            num_ptr = malloc(sizeof(int));
-            if (num_ptr == NULL || num == LONG_MAX - 1)
-            {
-                ft_free_arr(arr);
-                return (free(num_ptr),1);
-            }
-            *num_ptr = num; 
-            ft_lstadd_back(&(*stack_a), ft_lstnew(num_ptr));
-            j++;
+            ft_free_arr(arr);        
+            return(1);
         }
         ft_free_arr(arr);
         i++;

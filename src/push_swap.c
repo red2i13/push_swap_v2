@@ -105,19 +105,6 @@ int ft_read(char **av, t_list **stack_a, int ac)
         if(!arr || !arr[0])
             return (ft_free_arr(arr),1);
         j = 0;
-        // while(arr[j])
-        // {
-        //     num = f_atoi(arr[j]);
-        //     num_ptr = malloc(sizeof(int));
-        //     if (num_ptr == NULL || num == LONG_MAX - 1)
-        //     {
-        //         ft_free_arr(arr);
-        //         return (free(num_ptr),1);
-        //     }
-        //     *num_ptr = num; 
-        //     ft_lstadd_back(&(*stack_a), ft_lstnew(num_ptr));
-        //     j++;
-        // }
         if(enqeue(arr[j], stack_a))
         {
             ft_free_arr(arr);        
