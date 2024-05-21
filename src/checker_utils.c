@@ -17,6 +17,7 @@ int	is_sorted(t_list *stack)
 	}
 	return (0);
 }
+
 int	enqeue(char *n_parse, t_list **stack_a)
 {
 	long	num;
@@ -32,6 +33,7 @@ int	enqeue(char *n_parse, t_list **stack_a)
 	ft_lstadd_back(&(*stack_a), ft_lstnew(num_ptr));
 	return (0);
 }
+
 int	ft_read(char **av, t_list **stack_a, int ac)
 {
 	char	**arr;
@@ -55,6 +57,7 @@ int	ft_read(char **av, t_list **stack_a, int ac)
 	}
 	return (0);
 }
+
 void	ft_free_arr(char **arr)
 {
 	int	i;
@@ -67,6 +70,7 @@ void	ft_free_arr(char **arr)
 	}
 	free(arr);
 }
+
 void	ft_free_list(t_list *lst)
 {
 	t_list	*tmp;
@@ -79,19 +83,19 @@ void	ft_free_list(t_list *lst)
 		free(tmp);
 	}
 }
+
 long	f_atoi(const char *nptr)
 {
-	int i;
-	long result;
-	int sign;
+	int		i;
+	long	result;
+	int		sign;
 
 	sign = 1;
 	i = 0;
 	result = 0;
 	if (nptr[i] == '-' || nptr[i] == '+')
 	{
-		if (nptr[i] == '-')
-			sign = -1;
+		sign = (-1 * (nptr[i] == '-')) + (1 * (nptr[i] == '+'));
 		i++;
 		if (!nptr[i])
 			return (LONG_MAX - 1);

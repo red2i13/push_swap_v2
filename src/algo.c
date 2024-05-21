@@ -15,6 +15,7 @@ void	init_index(t_list **stack)
 		i++;
 	}
 }
+
 void	init_idx_rank(t_list **stack, int *arr, int size)
 {
 	int		i;
@@ -30,6 +31,7 @@ void	init_idx_rank(t_list **stack, int *arr, int size)
 		i++;
 	}
 }
+
 int	min_max(t_list *stack, int flag)
 {
 	int	val;
@@ -64,6 +66,7 @@ int	is_sorted(t_list *stack)
 	}
 	return (0);
 }
+
 int	find_pos(t_list *stack, int rank)
 {
 	while (stack)
@@ -74,6 +77,7 @@ int	find_pos(t_list *stack, int rank)
 	}
 	return (0);
 }
+
 void	rot_max(t_list **stack_a, int pos)
 {
 	int	len;
@@ -90,11 +94,9 @@ void	rot_max(t_list **stack_a, int pos)
 		i--;
 	}
 }
-void	ft_sort_threee(t_list **stack)
-{
-	int	min;
-	int	max;
 
+void	ft_sort_threee(t_list **stack, int min, int max)
+{
 	min = min_max(*stack, 0);
 	max = min_max(*stack, 1);
 	while (is_sorted(*stack))
@@ -105,7 +107,7 @@ void	ft_sort_threee(t_list **stack)
 			continue ;
 		}
 		else if ((*(int *)(*stack)->next->next->content == max
-				&& *(int *)(*stack)->next->content == min)
+			&& *(int *)(*stack)->next->content == min)
 			|| (*(int *)(*stack)->content == max
 				&& *(int *)(*stack)->next->next->content == min))
 		{
@@ -113,7 +115,7 @@ void	ft_sort_threee(t_list **stack)
 			continue ;
 		}
 		else if ((*(int *)(*stack)->content == max
-				&& *(int *)(*stack)->next->content == min))
+			&& *(int *)(*stack)->next->content == min))
 		{
 			ra(stack, true);
 			continue ;
@@ -121,6 +123,7 @@ void	ft_sort_threee(t_list **stack)
 	}
 	init_index(stack);
 }
+
 void	find_min(t_list **stack_a, t_list **stack_b, int rank)
 {
 	t_list	*tmp;
@@ -136,12 +139,13 @@ void	find_min(t_list **stack_a, t_list **stack_b, int rank)
 		tmp = tmp->next;
 	}
 }
+
 void	ft_sort_five(t_list **stack_a, t_list **stack_b)
 {
 	find_min(stack_a, stack_b, 0);
 	init_index(stack_a);
 	find_min(stack_a, stack_b, 1);
-	ft_sort_threee(stack_a);
+	ft_sort_threee(stack_a, 0, 0);
 	if (*(int *)(*stack_b)->content > *(int *)(*stack_b)->next->content)
 		pa(stack_a, stack_b, true);
 	else
@@ -151,12 +155,14 @@ void	ft_sort_five(t_list **stack_a, t_list **stack_b)
 	}
 	pa(stack_a, stack_b, true);
 }
+
 void	ft_sort_four(t_list **stack_a, t_list **stack_b)
 {
 	find_min(stack_a, stack_b, 0);
-	ft_sort_threee(stack_a);
+	ft_sort_threee(stack_a, 0, 0);
 	pa(stack_a, stack_b, true);
 }
+
 int	selection_sort(int *num, int size)
 {
 	int	i;
@@ -194,6 +200,7 @@ t_list	*find_max(t_list **stack_b)
 	}
 	return (max);
 }
+
 void	final_sort(t_list **stack_a, t_list **stack_b, int max_i)
 {
 	t_list	*max;
@@ -230,6 +237,7 @@ int	still_inrange(t_list *stack, int range)
 	}
 	return (i);
 }
+
 void	algo(t_list **stack_a, t_list **stack_b, int len_a, int range)
 {
 	int	min;
@@ -255,6 +263,7 @@ void	algo(t_list **stack_a, t_list **stack_b, int len_a, int range)
 	}
 	final_sort(stack_a, stack_b, len_a - 1);
 }
+
 int	algo_start(t_list **stack_a, t_list **stack_b, int *arr)
 {
 	int	len_a;
@@ -269,7 +278,7 @@ int	algo_start(t_list **stack_a, t_list **stack_b, int *arr)
 	else if (len_a == 4)
 		return (ft_sort_four(stack_a, stack_b), 0);
 	else if (len_a == 3)
-		return (ft_sort_threee(stack_a), 0);
+		return (ft_sort_threee(stack_a, 0, 0), 0);
 	else if (len_a == 2)
 	{
 		if (*(int *)(*stack_a)->content > *(int *)(*stack_a)->next->content)

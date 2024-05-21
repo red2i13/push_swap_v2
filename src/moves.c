@@ -12,6 +12,7 @@ void	sa(t_list **stack_a, bool flag)
 	if (flag == true)
 		ft_printf("sa\n");
 }
+
 void	sb(t_list **stack_b, bool flag)
 {
 	void	*num;
@@ -24,6 +25,7 @@ void	sb(t_list **stack_b, bool flag)
 	if (flag == true)
 		ft_printf("sb\n");
 }
+
 void	ss(t_list **stack_a, t_list **stack_b, bool flag)
 {
 	if (!(*stack_a) || !(*stack_b))
@@ -33,6 +35,7 @@ void	ss(t_list **stack_a, t_list **stack_b, bool flag)
 	if (flag == true)
 		ft_printf("ss\n");
 }
+
 void	ra(t_list **stack_a, bool flag)
 {
 	t_list	*first;
@@ -74,6 +77,7 @@ void	rr(t_list **stack_a, t_list **stack_b, bool flag)
 	if (flag == true)
 		printf("rr\n");
 }
+
 void	rra(t_list **stack_a, bool flag)
 {
 	t_list	*before_last;
@@ -95,6 +99,7 @@ void	rra(t_list **stack_a, bool flag)
 	if (flag == true)
 		ft_printf("rra\n");
 }
+
 void	rrb(t_list **stack_b, bool flag)
 {
 	t_list	*before_last;
@@ -116,6 +121,7 @@ void	rrb(t_list **stack_b, bool flag)
 	if (flag == true)
 		ft_printf("rrb\n");
 }
+
 void	rrr(t_list **stack_a, t_list **stack_b, bool flag)
 {
 	if (!(*stack_a) || !(*stack_b))
@@ -139,9 +145,10 @@ void	pa(t_list **stack_a, t_list **stack_b, bool flag)
 	if (flag == true)
 		ft_printf("pa\n");
 }
+
 void	pb(t_list **stack_a, t_list **stack_b, bool flag)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	if (!(*stack_a))
 		return ;

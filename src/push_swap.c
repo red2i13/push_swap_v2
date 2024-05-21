@@ -17,6 +17,7 @@ int	*int_arr(t_list *stack)
 	}
 	return (arr);
 }
+
 long	f_atoi(const char *nptr)
 {
 	int		i;
@@ -28,7 +29,7 @@ long	f_atoi(const char *nptr)
 	result = 0;
 	if (nptr[i] == '-' || nptr[i] == '+')
 	{
-		sign = -1 *(nptr[i] == '-');
+		sign = (-1 * (nptr[i] == '-')) + (1 * (nptr[i] == '+'));
 		i++;
 		if (!nptr[i])
 			return (LONG_MAX - 1);
@@ -163,4 +164,3 @@ int	main(int ac, char **av)
 	ft_free_list(stack_b);
 	free(arr);
 }
-

@@ -6,6 +6,7 @@ int	ft_cal(int num, int index)
 		return (1);
 	return (num * ft_cal(num, index - 1));
 }
+
 int	ft_sqrt(int num)
 {
 	int	i;
@@ -21,11 +22,12 @@ int	ft_sqrt(int num)
 	}
 	return (i - 1);
 }
+
 int	find_num(int num, int *arr, int size)
 {
-	int min;
-	int max;
-	int mid;
+	int	min;
+	int	max;
+	int	mid;
 
 	min = 0;
 	max = size - 1;
