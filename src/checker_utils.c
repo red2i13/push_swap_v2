@@ -77,3 +77,19 @@ void	ft_free_list(t_list *lst)
 		free(tmp);
 	}
 }
+
+int	is_sorted(t_list *stack)
+{
+	int	num;
+	int	compare;
+
+	while (stack->next)
+	{
+		num = *(int *)stack->content;
+		compare = *(int *)stack->next->content;
+		if (num > compare)
+			return (1);
+		stack = stack->next;
+	}
+	return (0);
+}
