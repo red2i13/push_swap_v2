@@ -1,6 +1,6 @@
 SRCS = ft_printstr.c ft_putchar.c ft_puthexalow.c ft_uns_int.c ft_printf.c ft_put_adress.c ft_puthexa.c ft_putnbr.c ft_strlcpy.c ft_strlen.c
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g 
+CFLAGS = -Wall -Wextra -Werror
 
 OBJS = $(SRCS:.c=.o)
 

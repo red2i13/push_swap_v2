@@ -1,10 +1,10 @@
 CFLAGS = -Wall -Wextra -Werror
-FILES =  push_swap.c moves.c get_next_line.c get_next_line_utils.c algo.c utils_func.c
+FILES =  push_swap.c moves.c moves1.c moves2.c get_next_line.c get_next_line_utils.c algo.c algo1.c algo2.c utils_func.c parse_func.c 
 SOURCES = $(addprefix $(SRC_DIR)/, $(FILES))
 OBJECTS = $(SOURCES:.c=.o)
 NAME = push_swap
 BONUS = checker
-SOURCES_BONUS = $(addprefix $(SRC_DIR)/, checker.c get_next_line.c get_next_line_utils.c moves.c checker_utils.c)
+SOURCES_BONUS = $(addprefix $(SRC_DIR)/, checker.c get_next_line.c get_next_line_utils.c moves.c moves1.c moves2.c checker_utils.c utils_func.c)
 OBJECTS_BONUS = $(SOURCES_BONUS:.c=.o)
 CC = cc
 LIB = libft
@@ -14,7 +14,8 @@ LIBFT_DIR = libft/include
 INCLUDES = include
 
 all: $(NAME) logo
-bonus: $(OBJECTS_BONUS) libft/libft.a printf/libftprintf.a
+bonus: $(BONUS) logo
+$(BONUS):$(OBJECTS_BONUS) libft/libft.a printf/libftprintf.a
 	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -I$(INCLUDES) -o $(BONUS) $^
 
 logo: 

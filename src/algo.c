@@ -1,99 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbenmakh <rbenmakh@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/21 15:16:21 by rbenmakh          #+#    #+#             */
+/*   Updated: 2024/05/21 15:16:23 by rbenmakh         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-void	init_index(t_list **stack)
-{
-	int		i;
-	t_list	*tmp;
-
-	i = 0;
-	tmp = *stack;
-	while (tmp)
-	{
-		tmp->pos = i;
-		tmp = tmp->next;
-		i++;
-	}
-}
-
-void	init_idx_rank(t_list **stack, int *arr, int size)
-{
-	int		i;
-	t_list	*tmp;
-
-	i = 0;
-	tmp = *stack;
-	while (tmp)
-	{
-		tmp->pos = i;
-		tmp->rank = find_num(*(int *)tmp->content, arr, size);
-		tmp = tmp->next;
-		i++;
-	}
-}
-
-int	min_max(t_list *stack, int flag)
-{
-	int	val;
-	int	tmp;
-
-	val = *(int *)stack->content;
-	stack = stack->next;
-	while (stack)
-	{
-		tmp = *(int *)stack->content;
-		if (flag == 0 && val > tmp)
-			val = tmp;
-		else if (flag == 1 && val < tmp)
-			val = tmp;
-		stack = stack->next;
-	}
-	return (val);
-}
-
-int	is_sorted(t_list *stack)
-{
-	int	num;
-	int	compare;
-
-	while (stack->next)
-	{
-		num = *(int *)stack->content;
-		compare = *(int *)stack->next->content;
-		if (num > compare)
-			return (1);
-		stack = stack->next;
-	}
-	return (0);
-}
-
-int	find_pos(t_list *stack, int rank)
-{
-	while (stack)
-	{
-		if (stack->rank == rank)
-			return (stack->pos);
-		stack = stack->next;
-	}
-	return (0);
-}
-
-void	rot_max(t_list **stack_a, int pos)
-{
-	int	len;
-	int	i;
-
-	len = ft_lstsize(*stack_a);
-	i = pos * (pos <= len / 2) + (len - pos) * (pos > len / 2);
-	while (i)
-	{
-		if (pos <= len / 2)
-			ra(stack_a, true);
-		else
-			rra(stack_a, true);
-		i--;
-	}
-}
 
 void	ft_sort_threee(t_list **stack, int min, int max)
 {
@@ -124,22 +41,6 @@ void	ft_sort_threee(t_list **stack, int min, int max)
 	init_index(stack);
 }
 
-void	find_min(t_list **stack_a, t_list **stack_b, int rank)
-{
-	t_list	*tmp;
-
-	tmp = *stack_a;
-	while (tmp)
-	{
-		if (tmp->rank == rank)
-		{
-			rot_max(stack_a, tmp->pos);
-			pb(stack_a, stack_b, true);
-		}
-		tmp = tmp->next;
-	}
-}
-
 void	ft_sort_five(t_list **stack_a, t_list **stack_b)
 {
 	find_min(stack_a, stack_b, 0);
@@ -161,81 +62,6 @@ void	ft_sort_four(t_list **stack_a, t_list **stack_b)
 	find_min(stack_a, stack_b, 0);
 	ft_sort_threee(stack_a, 0, 0);
 	pa(stack_a, stack_b, true);
-}
-
-int	selection_sort(int *num, int size)
-{
-	int	i;
-	int	j;
-	int	tmp;
-
-	i = 1;
-	while (i < size)
-	{
-		j = i;
-		while (j > 0 && num[j - 1] > num[j])
-		{
-			tmp = num[j];
-			num[j] = num[j - 1];
-			num[j - 1] = tmp;
-			j--;
-		}
-		i++;
-	}
-	return (0);
-}
-
-t_list	*find_max(t_list **stack_b)
-{
-	t_list	*tmp;
-	t_list	*max;
-
-	tmp = *stack_b;
-	max = *stack_b;
-	while (tmp)
-	{
-		if (*(int *)tmp->content > *(int *)max->content)
-			max = tmp;
-		tmp = tmp->next;
-	}
-	return (max);
-}
-
-void	final_sort(t_list **stack_a, t_list **stack_b, int max_i)
-{
-	t_list	*max;
-	int		len_b;
-
-	len_b = max_i + 1;
-	while (*stack_b)
-	{
-		max = find_max(stack_b);
-		init_index(stack_b);
-		while (*stack_b != max)
-		{
-			if (max->pos > len_b / 2)
-				rrb(stack_b, true);
-			else
-				rb(stack_b, true);
-		}
-		pa(stack_a, stack_b, true);
-		len_b--;
-	}
-}
-
-int	still_inrange(t_list *stack, int range)
-{
-	int	i;
-
-	i = 0;
-	while (stack)
-	{
-		if (stack->rank < range)
-			return (i);
-		stack = stack->next;
-		i++;
-	}
-	return (i);
 }
 
 void	algo(t_list **stack_a, t_list **stack_b, int len_a, int range)

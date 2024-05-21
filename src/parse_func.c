@@ -1,32 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker_utils.c                                    :+:      :+:    :+:   */
+/*   parse_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rbenmakh <rbenmakh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/21 15:16:41 by rbenmakh          #+#    #+#             */
-/*   Updated: 2024/05/21 15:16:45 by rbenmakh         ###   ########.fr       */
+/*   Created: 2024/05/21 15:18:26 by rbenmakh          #+#    #+#             */
+/*   Updated: 2024/05/21 15:18:30 by rbenmakh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-int	enqeue(char *n_parse, t_list **stack_a)
-{
-	long	num;
-	int		*num_ptr;
-
-	num = f_atoi(n_parse);
-	num_ptr = malloc(sizeof(int));
-	if (num_ptr == NULL || num == LONG_MAX - 1)
-	{
-		return (free(num_ptr), 1);
-	}
-	*num_ptr = num;
-	ft_lstadd_back(&(*stack_a), ft_lstnew(num_ptr));
-	return (0);
-}
 
 int	ft_read(char **av, t_list **stack_a, int ac)
 {
@@ -52,28 +36,43 @@ int	ft_read(char **av, t_list **stack_a, int ac)
 	return (0);
 }
 
-void	ft_free_arr(char **arr)
+int	is_duplicated(t_list *tmp)
 {
-	int	i;
+	t_list	*tmp1;
 
-	i = 0;
-	while (arr[i])
+	tmp1 = tmp;
+	while (tmp)
 	{
-		free(arr[i]);
-		i++;
+		tmp1 = tmp->next;
+		while (tmp1)
+		{
+			if ((*(int *)tmp->content) == (*(int *)tmp1->content))
+				return (1);
+			tmp1 = tmp1->next;
+		}
+		tmp = tmp->next;
 	}
-	free(arr);
+	return (0);
 }
 
-void	ft_free_list(t_list *lst)
+int	selection_sort(int *num, int size)
 {
-	t_list	*tmp;
+	int	i;
+	int	j;
+	int	tmp;
 
-	while (lst)
+	i = 1;
+	while (i < size)
 	{
-		free(lst->content);
-		tmp = lst;
-		lst = lst->next;
-		free(tmp);
+		j = i;
+		while (j > 0 && num[j - 1] > num[j])
+		{
+			tmp = num[j];
+			num[j] = num[j - 1];
+			num[j - 1] = tmp;
+			j--;
+		}
+		i++;
 	}
+	return (0);
 }
